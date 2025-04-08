@@ -1,0 +1,5 @@
+levels:
+  level:
+    tool:
+      pyright:
+        flags: ""

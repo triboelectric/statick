@@ -42,6 +42,7 @@ dependencies = [
     "pydocstyle",
     "pyflakes",
     "pylint",
+    "pyright",
     "restructuredtext-lint",
     "rstcheck",
     "ruff>=0.0.237",
@@ -130,6 +131,7 @@ pycodestyle = "statick_tool.plugins.tool.pycodestyle:PycodestyleToolPlugin"
 pydocstyle = "statick_tool.plugins.tool.pydocstyle:PydocstyleToolPlugin"
 pyflakes = "statick_tool.plugins.tool.pyflakes:PyflakesToolPlugin"
 pylint = "statick_tool.plugins.tool.pylint:PylintToolPlugin"
+pyright = "statick_tool.plugins.tool.pyright:PyrightToolPlugin"
 rstcheck = "statick_tool.plugins.tool.rstcheck:RstcheckToolPlugin"
 rstlint = "statick_tool.plugins.tool.rstlint:RstlintToolPlugin"
 ruff = "statick_tool.plugins.tool.ruff:RuffToolPlugin"

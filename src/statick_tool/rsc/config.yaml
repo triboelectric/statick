@@ -386,6 +386,8 @@ levels:
         flags: "--good-names=f,i,j,k,ex,_
                 --disable=duplicate-code,unsubscriptable-object
                "
+      pyright:
+        flags: ""
       shellcheck:
         flags: ""
       uncrustify:

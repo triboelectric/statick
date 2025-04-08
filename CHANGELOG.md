@@ -16,6 +16,9 @@ The main Statick repository was moved from <https://github.com/sscpac/statick> t
     or just the ones enabled for the current run (`--tool-versions-run`) during a scan.
 - Arguments and return description added to all method docstrings.
 - Dev container (VS Code) for Statick developers. (#534)
+- Support for pyright tool. (#539)
+  - Plugin to run tool and parse results.
+  - Updates to Statick code to pass pyright.
 
 ### Fixed
 
