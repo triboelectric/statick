@@ -4,7 +4,7 @@ Sets what flags are used for each plugin at those levels.
 """
 
 import os
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
 import yaml
 
@@ -72,7 +72,10 @@ class Config:
             with open(filename, encoding="utf8") as fid:
                 try:
                     return yaml.safe_load(fid)
-                except (yaml.YAMLError, yaml.scanner.ScannerError) as ex:
+                except (
+                    yaml.YAMLError,
+                    yaml.scanner.ScannerError,  # pyright: ignore
+                ) as ex:
                     raise ValueError(
                         f"{filename} is not a valid YAML file: {ex}"
                     ) from ex
@@ -185,7 +188,7 @@ class Config:
         level: str,
         key: str,
         default: Optional[str] = None,
-    ) -> Optional[Union[str, Any]]:
+    ) -> Optional[str]:
         """Get flags to use for a plugin at a certain level.
 
         Args:

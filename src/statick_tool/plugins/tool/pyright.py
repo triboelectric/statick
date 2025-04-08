@@ -2,10 +2,8 @@
 
 import json
 import logging
-import re
 import subprocess
-import sys
-from typing import Match, Optional, Pattern
+from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -97,7 +95,7 @@ class PyrightToolPlugin(ToolPlugin):
 
         for output in total_output:
             try:
-                output = json.loads(output)
+                data = json.loads(output)
             except json.JSONDecodeError as ex:
                 logging.warning("JSONDecodeError: %s", ex)
                 continue
@@ -105,11 +103,11 @@ class PyrightToolPlugin(ToolPlugin):
                 logging.warning("ValueError: %s", ex)
                 continue
             try:
-                output = output["generalDiagnostics"]
+                data = data["generalDiagnostics"]
             except KeyError:
                 logging.warning("No generalDiagnostics found in output.")
                 continue
-            for issue in output:
+            for issue in data:
                 severity = 1
                 if issue["severity"] == "warning":
                     severity = 3
@@ -119,7 +117,7 @@ class PyrightToolPlugin(ToolPlugin):
                 issues.append(
                     Issue(
                         issue["file"],
-                        issue["range"]["start"]["line"],
+                        int(issue["range"]["start"]["line"]),
                         self.get_name(),
                         issue["rule"],
                         severity,

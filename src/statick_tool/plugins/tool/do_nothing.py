@@ -77,4 +77,6 @@ class DoNothingToolPlugin(ToolPlugin):
         Returns:
             List of issues.
         """
-        return []
+        issues: list[Issue] = []
+
+        return issues

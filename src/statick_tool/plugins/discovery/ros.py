@@ -89,7 +89,7 @@ class RosDiscoveryPlugin(DiscoveryPlugin):
                 try:
                     output = xmltodict.parse(fconfig.read())
                 except (
-                    xmltodict.expat.ExpatError,
+                    xmltodict.expat.ExpatError,  # pyright: ignore
                     xmltodict.ParsingInterrupted,
                 ) as exc:
                     # No valid XML found, so we are not going to find the build type.

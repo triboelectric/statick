@@ -21,10 +21,12 @@ class MyCustomToolPlugin(ToolPlugin):
     def scan(self, package, level):
         """Run tool and gather output."""
         flags = ["-rn"]
-        user_flags = self.plugin_context.config.get_tool_config(
-            self.get_name(), level, "flags"
-        )
-        lex = shlex.shlex(user_flags, posix=True)
+        user_flags = []
+        if self.plugin_context is not None and "config" in self.plugin_context:
+            user_flags = self.plugin_context.config.get_tool_config(
+                self.get_name(), level, "flags"
+            )
+        lex = shlex.shlex(user_flags, posix=True)  # pyright: ignore
         lex.whitespace_split = True
         flags = flags + list(lex)
 
@@ -41,12 +43,12 @@ class MyCustomToolPlugin(ToolPlugin):
         logging.debug("%s", output)
 
         with open(self.get_name() + ".log", "w", encoding="utf8") as fid:
-            fid.write(output)
+            fid.write(output)  # pyright: ignore
 
         issues = self.parse_output(output)
         return issues
 
-    def parse_output(self, total_output, _=None):
+    def parse_output(self, total_output, _=None):  # pyright: ignore
         """Parse tool output and report issues."""
         grep_re = r"(.+):(\d+):(.+)"
         parse = re.compile(grep_re)
@@ -58,11 +60,12 @@ class MyCustomToolPlugin(ToolPlugin):
                 issues.append(
                     Issue(
                         match.group(1),
-                        match.group(2),
+                        int(match.group(2)),
                         self.get_name(),
                         "banned_pattern",
                         5,
                         "Banned pattern found: " + match.group(3),
+                        None,
                     )
                 )
 

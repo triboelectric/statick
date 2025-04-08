@@ -184,14 +184,14 @@ class ClangFormatToolPlugin(ToolPlugin):
         if self.plugin_context is None:
             return False
 
+        default_file_name = "_clang-format"
+        format_file_name = self.plugin_context.resources.get_file(default_file_name)
+        exc_msg = (
+            "_clang-format or .clang-format style is not correct. "
+            f"There is one located in {format_file_name}. "
+            "Put this file in your home directory."
+        )
         try:
-            default_file_name = "_clang-format"
-            format_file_name = self.plugin_context.resources.get_file(default_file_name)
-            exc_msg = (
-                "_clang-format or .clang-format style is not correct. "
-                f"There is one located in {format_file_name}. "
-                "Put this file in your home directory."
-            )
 
             if not os.path.isfile(os.path.expanduser("~/" + default_file_name)):
                 default_file_name = ".clang-format"

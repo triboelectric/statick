@@ -183,10 +183,9 @@ class DockerfileULintToolPlugin(ToolPlugin):
                             message += ": " + issue["description"]
 
                         title = severity_str
+                        line = -1
                         if "line" in issue:
-                            line = issue["line"]
-                        else:
-                            line = "-1"
+                            line = int(issue["line"])
                         if "label" in issue:
                             title = issue["label"]
 

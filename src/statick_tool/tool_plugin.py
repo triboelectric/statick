@@ -217,12 +217,15 @@ class ToolPlugin:
 
     def parse_output(  # type: ignore[empty-body]
         self, total_output: list[str], package: Optional[Package] = None
-    ) -> list[Issue]:
+    ) -> list[Issue]:  # pyright: ignore
         """Parse tool output and report issues.
 
         Args:
             total_output: Output from tool.
             package: Package with issues.
+
+        Returns:
+            List of issues.
         """
 
     def set_plugin_context(self, plugin_context: Union[None, PluginContext]) -> None:

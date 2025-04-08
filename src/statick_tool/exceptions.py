@@ -35,7 +35,7 @@ class Exceptions:
         with open(filename, encoding="utf8") as fname:
             try:
                 self.exceptions: dict[Any, Any] = yaml.safe_load(fname)
-            except (yaml.YAMLError, yaml.scanner.ScannerError) as ex:
+            except (yaml.YAMLError, yaml.scanner.ScannerError) as ex:  # pyright: ignore
                 raise ValueError(f"{filename} is not a valid YAML file: {ex}") from ex
 
     def get_ignore_packages(self) -> list[str]:

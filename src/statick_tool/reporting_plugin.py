@@ -30,7 +30,7 @@ class ReportingPlugin:
 
     def report(  # type: ignore[empty-body]
         self, package: Package, issues: dict[str, list[Issue]], level: str
-    ) -> Tuple[Optional[None], bool]:
+    ) -> Tuple[Optional[None], bool]:  # pyright: ignore
         """Run the report generator.
 
         Args:

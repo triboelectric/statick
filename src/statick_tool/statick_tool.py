@@ -808,6 +808,7 @@ class Statick:  # pylint: disable=too-many-instance-attributes
         """
         logger = logging.getLogger()
         old_handler = None
+        handler = None
         if logger.handlers[0]:
             old_handler = logger.handlers[0]
             handler = MemoryHandler(10000, flushLevel=logging.ERROR, target=old_handler)
@@ -841,7 +842,7 @@ class Statick:  # pylint: disable=too-many-instance-attributes
         else:
             logging.error("Failed to run statick on package %s!", package.name)
 
-        if old_handler is not None:
+        if handler is not None and old_handler is not None:
             handler.flush()
             logger.removeHandler(handler)
             logger.addHandler(old_handler)
