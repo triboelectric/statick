@@ -496,6 +496,7 @@ Tool                               | About
 [pydocstyle][pydocstyle]           | A static analysis tool for checking compliance with Python docstring conventions.
 [pyflakes][pyflakes]               | A simple program which checks Python source files for errors
 [pylint][pylint]                   | It's not just a linter that annoys you!
+[pyright][pyright]                 | Static Type Checker for Python
 [rst-lint][rst-lint]               | Checks syntax of reStructuredText and code blocks nested within it.
 [rstcheck][rstcheck]               | Checks syntax of reStructuredText and code blocks nested within it.
 [ruff][ruff]                       | An extremely fast Python linter, written in Rust.
@@ -990,6 +991,7 @@ His commits were scrubbed from git history upon the initial public release.
 [pydocstyle]: http://www.pydocstyle.org/en/stable/
 [pyflakes]: https://github.com/PyCQA/pyflakes
 [pylint]: https://pylint.org/
+[pyright]: https://github.com/microsoft/pyright
 [ros]: https://www.ros.org/
 [rst-lint]: https://github.com/twolfson/restructuredtext-lint
 [rstcheck]: https://github.com/myint/rstcheck

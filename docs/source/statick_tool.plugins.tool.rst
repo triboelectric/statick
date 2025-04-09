@@ -260,6 +260,14 @@ statick_tool.plugins.tool.pylint module
     :undoc-members:
     :show-inheritance:
 
+statick_tool.plugins.tool.pyright module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: statick_tool.plugins.tool.pyright
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 statick_tool.plugins.tool.rstcheck module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
