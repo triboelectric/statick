@@ -1,0 +1,47 @@
+name: 'Statick-CI'
+author: 'Triboelectric'
+description: 'Run Statick'
+branding:
+  icon: 'zap'
+  color: 'yellow'
+inputs:
+  check:
+    description: "Fail on any Statick warning"
+    required: false
+    default: true
+  config:
+    description: "Configuration"
+    required: false
+    default: config.yaml
+  level:
+    description: "Scan level to use.  Overrides levels specified by the profile."
+    required: false
+    default:
+  log_level:
+    description: "Log verbosity level"
+    required: false
+    default: INFO
+  output_path:
+    description: "Path to store output logs"
+    required: false
+    default: /tmp/statick_output
+  package_path:
+    description: "Path to search for files"
+    required: false
+    default: statick
+  profile:
+    description: "Profile configuration"
+    required: false
+    default: profile.yaml
+  timings:
+    description: "Include timing information to stdout"
+    required: false
+    default: false
+  user_paths:
+    description: "Paths (comma delimited) for user-defined configuration"
+    required: false
+    default:
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

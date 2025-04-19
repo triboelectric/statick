@@ -1,0 +1,22 @@
+---
+name: Test Action
+
+on: # NOLINT
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          path: "statick"
+      - name: Statick
+        uses: ./statick/action
+        with:
+          profile: self_check.yaml
+          timings: true
+          user_paths: statick/.github/workflows,statick/src/statick_tool

@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
 
 LABEL "name"="Statick"
-LABEL "version"="0.0"
+LABEL "version"="0.12.0"
 LABEL "repository"="https://github.com/triboelectric/statick.git"
 LABEL "homepage"="https://github.com/triboelectric/statick"
 LABEL "maintainer"="Thomas Denewiler <tdenewiler@gmail.com>"

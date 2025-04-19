@@ -170,13 +170,14 @@ class CMakeDiscoveryPlugin(DiscoveryPlugin):
             output: The output to parse.
             package: The package to update.
         """
-        # pylint: disable=anomalous-backslash-in-string
+        # pylint: disable=anomalous-backslash-in-string, line-too-long
         cmake_target_re = r"-- TARGET: \[NAME:(.+)\]\[SRC_DIR:(.+)\]\[INCLUDE_DIRS:(.*)\]\[SRC:(.+)\]"  # NOQA: W605 # NOLINT
         target_p: Pattern[str] = re.compile(cmake_target_re)
         cmake_headers_re = r"-- HEADERS: (.+)"
         headers_p: Pattern[str] = re.compile(cmake_headers_re)
         cmake_roslint_re = r"-- ROSLINT: (.+)"
         roslint_p: Pattern[str] = re.compile(cmake_roslint_re)
+        # pylint: disable=line-too-long
         cmake_project_re = r"-- PROJECT: \[NAME:(.+)\]\[SRC_DIR:(.+)\]\[BIN_DIR:(.+)\]"  # NOQA: W605 # NOLINT
         project_p: Pattern[str] = re.compile(cmake_project_re)
         # pylint: enable=anomalous-backslash-in-string
