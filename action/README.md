@@ -1,6 +1,6 @@
 # statick-action
 
-[![Test Action](https://github.com/kogut/statick/actions/workflows/self-test.yml/badge.svg?branch=525-move-statick-action-into-this-main-repo)](https://github.com/kogut/statick/actions/workflows/self-test.yml)
+[![Test Action](https://github.com/triboelectric/statick/actions/workflows/self-test.yml/badge.svg)](https://github.com/triboelectric/statick/actions/workflows/self-test.yml)
 
 Improve your code quality by running dozens of the most popular and effective static code analysis
 tools at once from one simple action.
