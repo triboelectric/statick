@@ -15,7 +15,7 @@ jobs:
         with:
           path: "statick"
       - name: Statick
-        uses: ./statick/action
+        uses: ./statick
         with:
           profile: self_check.yaml
           timings: true
