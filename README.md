@@ -1,6 +1,7 @@
 # Statick
 
 ![Unit Tests](https://github.com/triboelectric/statick/workflows/Statick/badge.svg)
+[![Test Action](https://github.com/triboelectric/statick/actions/workflows/self-test.yml/badge.svg)](https://github.com/triboelectric/statick/actions/workflows/self-test.yml)
 [![Codecov](https://codecov.io/gh/triboelectric/statick/branch/master/graphs/badge.svg)](https://codecov.io/gh/triboelectric/statick/)
 [![PyPI version](https://badge.fury.io/py/statick.svg)](https://badge.fury.io/py/statick)
 ![Python Versions](https://img.shields.io/pypi/pyversions/statick.svg)

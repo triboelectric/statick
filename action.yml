@@ -1,4 +1,4 @@
-name: 'Statick-CI'
+name: 'Statick CI Action'
 author: 'Triboelectric'
 description: 'Run Statick'
 branding:
@@ -44,4 +44,4 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'action/Dockerfile'
