@@ -302,7 +302,11 @@ This _level_ sets all available _tools_ to use flags that find issues listed in
 Carnegie Mellon University Software Engineering Institute
 "CERT C++ Coding Standard: Rules for Developing Safe, Reliable, and Secure Systems".
 The rules and flags can be found in the
-[SEI CERT C/C++ Analyzers](https://wiki.sei.cmu.edu/confluence/display/cplusplus/CC.+Analyzers) chapter.
+[SEI CERT C++ Analyzers](https://wiki.sei.cmu.edu/confluence/display/cplusplus/CC.+Analyzers)
+and in the [SEI CERT C Analyzers](https://wiki.sei.cmu.edu/confluence/display/c/EE.+Analyzers) chapters.
+The rules in those chapters are updated periodically.
+To update Statick support find the relevant tool in the linked chapters and add it to the matching tool configuration
+in [`pluggin_mapping`](./src/statick_tool/rsc/plugin_mapping/).
 
 Using the `--level` flag when running Statick will result in that specific level running for all packages regardless
 of what the `--profile` is set to.
