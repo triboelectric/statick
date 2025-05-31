@@ -367,7 +367,8 @@ The `tools` key can either be `all` to suppress warnings from all tools or a lis
 The `regex` key is a regular expression to match against messages.
 The `globs` key is a list of globs of files to ignore.
 The glob could also be a specific filename.
-Information about the regex syntax used by Python can be found [here](https://docs.python.org/2/library/re.html).
+Information about the regex syntax used by Python can be found on the
+[Python regex site](https://docs.python.org/2/library/re.html).
 The site <https://regex101.com/> can be very helpful when trying to generate regular expressions to match the warnings
 you are trying to create an _exception_ for.
 
