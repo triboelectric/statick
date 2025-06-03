@@ -10,7 +10,7 @@ maintainers = [
     {name = "Greg Kogut", email="gregkogut@gmail.com"},
 ]
 description="Making code quality easier."
-version = "0.12.0"
+version = "0.13.0"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "CC0-1.0"}

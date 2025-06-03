@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+## v0.13.0 - 2025-06-03
+
 The main Statick repository was moved from <https://github.com/sscpac/statick> to
 <https://github.com/triboelectric/statick>.
 
@@ -19,6 +21,7 @@ The main Statick repository was moved from <https://github.com/sscpac/statick> t
 - Support for pyright tool. (#539)
   - Plugin to run tool and parse results.
   - Updates to Statick code to pass pyright.
+- Move Statick action into main repo. (#525)
 
 ### Fixed
 
@@ -29,6 +32,8 @@ The main Statick repository was moved from <https://github.com/sscpac/statick> t
 - Docker image now based on Ubuntu 24.04 instead of Ubuntu 20.04.
 - Organization name changes relfect repository move. (#535)
 - Change types of line number and severity in Issues from string to int. (#529)
+- Switch type hints from typing module Dict and List to built-in dict and list. (#530)
+- Update mapping of cppcheck warnings to SEI CERT findings. (#510)
 
 ### Removed
 
