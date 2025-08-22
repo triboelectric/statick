@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import json
 import subprocess
 import sys
 
@@ -42,9 +43,7 @@ def test_ruff_tool_plugin_found():
     for plugin_type in tool_plugins:
         plugin = plugin_type.load()
         plugins[plugin_type.name] = plugin()
-    assert any(
-        plugin.get_name() == "ruff" for _, plugin in list(plugins.items())
-    )
+    assert any(plugin.get_name() == "ruff" for _, plugin in list(plugins.items()))
 
 
 def test_ruff_tool_plugin_scan_valid():
@@ -63,8 +62,13 @@ def test_ruff_tool_plugin_scan_valid():
 def test_ruff_tool_plugin_parse_valid():
     """Verify that we can parse the normal output of ruff."""
     rtp = setup_ruff_tool_plugin()
-    output = "some_file.py:644:89: E501 Line too long (96 > 88 characters)"
-    issues = rtp.parse_output([output])
+    output = {
+        "code": "E501",
+        "filename": "some_file.py",
+        "location": {"column": 89, "row": 644},
+        "message": "Line too long (96 > 88 characters)",
+    }
+    issues = rtp.parse_output([json.dumps(output)])
     assert len(issues) == 1
     assert issues[0].filename == "some_file.py"
     assert issues[0].line_number == 644
@@ -73,8 +77,13 @@ def test_ruff_tool_plugin_parse_valid():
     assert issues[0].severity == 5
     assert issues[0].message == "Line too long (96 > 88 characters)"
 
-    output = "a_file.py:21:1: E402 Module level import not at top of file"
-    issues = rtp.parse_output([output])
+    output = {
+        "code": "E402",
+        "filename": "a_file.py",
+        "location": {"column": 1, "row": 21},
+        "message": "Module level import not at top of file",
+    }
+    issues = rtp.parse_output([json.dumps(output)])
     assert len(issues) == 1
     assert issues[0].filename == "a_file.py"
     assert issues[0].line_number == 21
