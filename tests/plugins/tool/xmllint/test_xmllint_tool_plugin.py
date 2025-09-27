@@ -50,6 +50,10 @@ def test_xmllint_tool_plugin_found():
 
 def test_xmllint_tool_plugin_scan_valid():
     """Integration test: Make sure the xmllint output hasn't changed."""
+    if sys.platform == "win32":
+        pytest.skip(
+            "Running xmllint on GitHub Windows runner is failing. Skipping test."
+        )
     xltp = setup_xmllint_tool_plugin()
     if not xltp.command_exists("xmllint"):
         pytest.skip("Missing xmllint executable.")

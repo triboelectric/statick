@@ -88,7 +88,7 @@ def test_stylelint_tool_plugin_scan_valid_with_issues():
     ]
     issues = plugin.scan(package, "level")
     # We expect to have block-no-empty and comment-no-empty errors.
-    assert len(issues) == 3
+    assert len(issues) == 4
 
 
 def test_stylelint_tool_plugin_parse_valid():

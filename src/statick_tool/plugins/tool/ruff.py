@@ -1,9 +1,9 @@
 """Apply ruff tool and gather results."""
 
+import json
 import logging
-import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -43,7 +43,7 @@ class RuffToolPlugin(ToolPlugin):
         Returns:
             The output from the tool.
         """
-        flags: list[str] = ["check"]
+        flags: list[str] = ["check", "--output-format", "json"]
         flags += user_flags
         total_output: list[str] = []
 
@@ -77,25 +77,28 @@ class RuffToolPlugin(ToolPlugin):
             A list of issues parsed from the output.
         """
         issues: list[Issue] = []
-        ruff_re = r"(.+):(\d+):(\d+):\s(.+)"
-        parse: Pattern[str] = re.compile(ruff_re)
 
-        for output in total_output:
-            for line in output.splitlines():
-                match: Optional[Match[str]] = parse.match(line)
-                if match:
-                    issue_type = match.group(4).split()[0]
-                    message = match.group(4).split(" ", 1)[1]
-                    issues.append(
-                        Issue(
-                            match.group(1),
-                            int(match.group(2)),
-                            self.get_name(),
-                            issue_type,
-                            5,
-                            message,
-                            None,
-                        )
-                    )
+        for output_str in total_output:
+            try:
+                results = json.loads(output_str.strip("[]"))
+            except json.JSONDecodeError as ex:
+                logging.error("Failed to decode ruff output as JSON: %s", ex)
+                continue
+
+            filename = results.get("filename")
+            line = results.get("location", {}).get("row", 1)
+            issue_type = results.get("code", "")
+            message = results.get("message", "")
+            issues.append(
+                Issue(
+                    filename,
+                    line,
+                    self.get_name(),
+                    issue_type,
+                    5,
+                    message,
+                    None,
+                )
+            )
 
         return issues
