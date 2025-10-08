@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Upcoming
 
+### Added
+
+- Support for Python 3.14 in CI.
+
 ## v0.13.0 - 2025-06-03
 
 The main Statick repository was moved from <https://github.com/sscpac/statick> to
