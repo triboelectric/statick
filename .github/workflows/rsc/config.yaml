@@ -367,6 +367,8 @@ levels:
     tool:
       black:
         flags: ""
+      docformatter:
+        flags: "--wrap-summaries 88 --wrap-descriptions 88"
       isort:
         flags: ""
       mypy:
@@ -387,8 +389,6 @@ levels:
       # pyright temporarily disabled for action-based self-check because it's running an older version of statick without this plugin
       # pyright:
       #   flags: ""
-      ruff:
-        flags: ""
       shellcheck:
         flags: ""
       uncrustify:

@@ -90,6 +90,7 @@ def test_config_inherits_from_multiple_levels():
     assert "catkin_lint" in plugins
     assert "cppcheck" in plugins
     assert "cpplint" in plugins
+    assert "docformatter" in plugins
     assert "isort" in plugins
     assert "mypy" in plugins
     assert "pydocstyle" in plugins

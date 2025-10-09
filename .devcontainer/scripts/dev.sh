@@ -3,7 +3,7 @@
 # Function to display help information.
 show_help() {
   echo "Statick Developer Commands:"
-  echo "  dev format     - Format all Python code with black."
+  echo "  dev format     - Format all Python code with black and docformatter."
   echo "  dev help       - Show this help message."
   echo "  dev qa         - Run linting and static analysis tools."
   echo "  dev reset-venv - Remove and recreate the virtual environment."
@@ -20,6 +20,7 @@ execute_command() {
     format)
         cd $APP_HOME || exit
         black src/statick_tool/
+        find src/statick_tool/ -name \*.py -exec docformatter -i --black {} \;
         ;;
     help)
         show_help

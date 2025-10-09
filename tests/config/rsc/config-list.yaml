@@ -24,6 +24,8 @@ levels:
     tool:
       black:
         flags: ""
+      docformatter:
+        flags: "--wrap-summaries 88 --wrap-descriptions 88"
       isort:
         flags: ""
       mypy:
