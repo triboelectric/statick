@@ -97,6 +97,21 @@ def test_docformatter_tool_plugin_parse_invalid():
     assert not issues
 
 
+def test_docformatter_version_not_supported(mocker):
+    """Test that docformatter handles Python 3.14+ correctly."""
+    if sys.version_info < (3, 14):
+        pytest.skip("This test is only for Python 3.14+")
+    mocker.patch("sys.version_info", (3, 14))
+    dtp = setup_docformatter_tool_plugin()
+    package = Package(
+        "valid_package", os.path.join(os.path.dirname(__file__), "valid_package")
+    )
+    package["python_src"] = [
+        os.path.join(os.path.dirname(__file__), "valid_package", "wrong.py")
+    ]
+    issues = dtp.scan(package, "level")
+    assert not issues
+
 @mock.patch(
     "statick_tool.plugins.tool.docformatter.subprocess.check_output"
 )
