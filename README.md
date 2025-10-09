@@ -429,7 +429,6 @@ $ statick . --output-directory /tmp/x --timings
 | statick |    uncrustify    |    Tool     |  0.0001  |
 | statick |    pydocstyle    |    Tool     |  4.8751  |
 | statick |    cmakelint     |    Tool     |  0.0249  |
-| statick |   docformatter   |    Tool     |  0.0020  |
 | statick | print_to_console |  Reporting  |  0.0318  |
 | Overall |                  |             | 89.6734  |
 +---------+------------------+-------------+----------+
@@ -483,7 +482,6 @@ Tool                               | About
 [cmakelint][cmakelint]             | The cmake-lint program will check your listfiles for style violations, common mistakes, and anti-patterns.
 [cppcheck][cppcheck]               | static analysis of C/C++ code
 [cpplint][cpplint]                 | Static code checker for C++
-[docformatter][docformatter]       | Formats docstrings to follow PEP 257
 [dockerfile-lint][dockerfile-lint] | A rule based 'linter' for Dockerfiles.
 [dockerfilelint][dockerfilelint]   | A rule based 'linter' for Dockerfiles.
 [eslint][eslint]                   | Find and fix problems in your JavaScript code.
@@ -905,13 +903,12 @@ It is hoped that in the future we will generate coverage reports from mypy and u
 
 ### Formatting
 
-Statick code is formatted using [black][black] and [docformatter][docformatter].
+Statick code is formatted using [black][black].
 To fix locally use
 
 ```shell
-pip install black docformatter
+pip install black
 black statick statick_tool tests
-docformatter -i --wrap-summaries 88 --wrap-descriptions 88 <file>
 ```
 
 ## Additional Installation
@@ -973,7 +970,6 @@ His commits were scrubbed from git history upon the initial public release.
 [code-climate]: https://github.com/codeclimate/platform/blob/master/spec/analyzers/SPEC.md#data-types
 [cppcheck]: https://github.com/danmar/cppcheck/
 [cpplint]: https://github.com/cpplint/cpplint
-[docformatter]: https://github.com/myint/docformatter
 [dockerfile-lint]: https://github.com/projectatomic/dockerfile_lint
 [dockerfilelint]: https://github.com/replicatedhq/dockerfilelint
 [eslint]: https://eslint.org/

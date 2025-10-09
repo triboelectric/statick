@@ -31,7 +31,6 @@ dependencies = [
     "black",
     "cmakelint",
     "cpplint",
-    "docformatter",
     "flawfinder",
     "importlib_metadata",
     "importlib_metadata",
@@ -112,7 +111,6 @@ cmakelint = "statick_tool.plugins.tool.cmakelint:CMakelintToolPlugin"
 cppcheck = "statick_tool.plugins.tool.cppcheck:CppcheckToolPlugin"
 cpplint = "statick_tool.plugins.tool.cpplint:CpplintToolPlugin"
 do_nothing = "statick_tool.plugins.tool.do_nothing:DoNothingToolPlugin"
-docformatter = "statick_tool.plugins.tool.docformatter:DocformatterToolPlugin"
 dockerfile-lint = "statick_tool.plugins.tool.dockerfile_lint:DockerfileULintToolPlugin"
 dockerfilelint = "statick_tool.plugins.tool.dockerfilelint:DockerfileLintToolPlugin"
 eslint = "statick_tool.plugins.tool.eslint:ESLintToolPlugin"

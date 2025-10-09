@@ -9,7 +9,6 @@ clang-tidy:Bug Risk
 cmakelint:Bug Risk
 cppcheck:Bug Risk
 cpplint:Bug Risk
-docformatter:Style
 flawfinder:Bug Risk
 npm-groovy-lint:Bug Risk
 lizard:Complexity

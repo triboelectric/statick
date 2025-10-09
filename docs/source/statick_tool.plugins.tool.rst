@@ -92,14 +92,6 @@ statick_tool.plugins.tool.cpplint module
     :undoc-members:
     :show-inheritance:
 
-statick_tool.plugins.tool.docformatter module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: statick_tool.plugins.tool.docformatter
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 statick_tool.plugins.tool.dockerfile_lint module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
