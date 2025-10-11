@@ -379,12 +379,9 @@ levels:
         flags: ""
       # Disabling duplicate code as it is giving unreliable results when running pylint against multiple files
       # at once.
-      # Disabling unsubscriptable-object as it has issues in Python 3.9 with type hints, among other false positives.
-      # https://github.com/PyCQA/pylint/issues/3139
-      # https://github.com/PyCQA/pylint/issues/3882
       pylint:
         flags: "--good-names=f,i,j,k,ex,_
-                --disable=duplicate-code,unsubscriptable-object
+                --disable=duplicate-code
                "
       # pyright temporarily disabled for action-based self-check because it's running an older version of statick without this plugin
       # pyright:
