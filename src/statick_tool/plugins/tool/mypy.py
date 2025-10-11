@@ -4,7 +4,7 @@ import logging
 import re
 import subprocess
 import sys
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -33,7 +33,7 @@ class MypyToolPlugin(ToolPlugin):
     # pylint: disable=too-many-locals, too-many-branches, too-many-return-statements
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -80,7 +80,7 @@ class MypyToolPlugin(ToolPlugin):
     # pylint: disable=too-many-locals, too-many-branches, too-many-return-statements
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 
@@ -101,7 +101,7 @@ class MypyToolPlugin(ToolPlugin):
             for line in lines:
                 if sys.platform != "win32" and not line.startswith("/"):
                     continue
-                match: Optional[Match[str]] = parse.match(line)
+                match: Match[str] | None = parse.match(line)
                 if match:
                     issue_type = match.group(5).strip("[]")
                     issues.append(

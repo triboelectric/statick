@@ -6,7 +6,7 @@ Enable usage of user-paths argument before parsing other arguments.
 import argparse
 import logging
 import os
-from typing import Any, Optional
+from typing import Any
 
 
 class Args:
@@ -53,7 +53,7 @@ class Args:
                     logging.error("Could not find user path %s!", path)
         return user_paths
 
-    def get_args(self, args: Optional[list[str]] = None) -> argparse.Namespace:
+    def get_args(self, args: list[str] | None = None) -> argparse.Namespace:
         """Get parsed command-line arguments.
 
         Args:

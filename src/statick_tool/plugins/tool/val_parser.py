@@ -14,7 +14,7 @@ import argparse
 import logging
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -46,7 +46,7 @@ class ValParserToolPlugin(ToolPlugin):
         )
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -65,7 +65,7 @@ class ValParserToolPlugin(ToolPlugin):
             binary = self.plugin_context.args.val_parser_bin
         return binary
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -136,7 +136,7 @@ class ValParserToolPlugin(ToolPlugin):
                 continue
 
             if issue_found:
-                match: Optional[Match[str]] = parse.match(line)
+                match: Match[str] | None = parse.match(line)
                 if match:
                     severity = 1
                     if match.group(4) == "Warning":

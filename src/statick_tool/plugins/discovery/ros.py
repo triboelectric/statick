@@ -3,7 +3,7 @@
 import logging
 import os
 from functools import reduce
-from typing import Any, Optional, Union
+from typing import Any
 
 import xmltodict
 
@@ -26,7 +26,7 @@ class RosDiscoveryPlugin(DiscoveryPlugin):
     @classmethod
     def deep_get(
         cls,
-        dictionary: Union[str, dict[Any, str]],
+        dictionary: str | dict[Any, str] | None,
         keys: str,
         default: str = "",
     ) -> Any:
@@ -53,7 +53,7 @@ class RosDiscoveryPlugin(DiscoveryPlugin):
         )
 
     def scan(
-        self, package: Package, level: str, exceptions: Optional[Exceptions] = None
+        self, package: Package, level: str, exceptions: Exceptions | None = None
     ) -> None:
         """Scan package looking for ROS package files.
 

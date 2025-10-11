@@ -13,7 +13,7 @@ import fnmatch
 import logging
 import os
 import re
-from typing import Any, Match, Optional, Pattern
+from typing import Any, Match, Pattern
 
 import yaml
 
@@ -24,7 +24,7 @@ from statick_tool.package import Package
 class Exceptions:
     """Interface for applying exceptions."""
 
-    def __init__(self, filename: Optional[str]) -> None:
+    def __init__(self, filename: str | None) -> None:
         """Initialize exceptions interface.
 
         Args:
@@ -202,13 +202,13 @@ class Exceptions:
                         if exception_globs:
                             for pattern in exception_globs:
                                 if fnmatch.fnmatch(issue.filename, pattern):
-                                    match: Optional[Match[str]] = compiled_re.match(
+                                    match: Match[str] | None = compiled_re.match(
                                         issue.message
                                     )
                                     if match:
                                         to_remove.append(issue)
                         else:
-                            match_re: Optional[Match[str]] = compiled_re.match(
+                            match_re: Match[str] | None = compiled_re.match(
                                 issue.message
                             )
                             if match_re:

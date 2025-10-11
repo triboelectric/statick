@@ -6,7 +6,7 @@ import logging
 import os
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -58,7 +58,7 @@ class ClangFormatToolPlugin(ToolPlugin):
         )
 
     def get_binary(
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Return the name of the tool binary.
 
@@ -90,9 +90,9 @@ class ClangFormatToolPlugin(ToolPlugin):
 
     def scan(  # pylint: disable=too-many-return-statements, too-many-branches
         self, package: Package, level: str
-    ) -> Optional[
-        list[Issue]
-    ]:  # pylint: disable=too-many-locals, too-many-branches, too-many-return-statements
+    ) -> (
+        list[Issue] | None
+    ):  # pylint: disable=too-many-locals, too-many-branches, too-many-return-statements
         """Run tool and gather output.
 
         Args:
@@ -114,7 +114,7 @@ class ClangFormatToolPlugin(ToolPlugin):
         if "headers" in package:
             files += package["headers"]
 
-        check: Optional[bool] = self.check_configuration(clang_format_bin)
+        check: bool | None = self.check_configuration(clang_format_bin)
         if check is None:
             return None
         if not check:
@@ -172,7 +172,7 @@ class ClangFormatToolPlugin(ToolPlugin):
         issues: list[Issue] = self.parse_tool_output(total_output, files)
         return issues
 
-    def check_configuration(self, clang_format_bin: str) -> Optional[bool]:
+    def check_configuration(self, clang_format_bin: str) -> bool | None:
         """Check that configuration is configured properly.
 
         Args:
@@ -259,7 +259,7 @@ class ClangFormatToolPlugin(ToolPlugin):
                 filename = lines[0]
                 count = 0
                 for line in lines:
-                    match: Optional[Match[str]] = parse.match(line)
+                    match: Match[str] | None = parse.match(line)
                     if match:
                         count += 1
                 if count > 0:

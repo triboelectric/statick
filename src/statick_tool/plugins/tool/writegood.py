@@ -6,7 +6,7 @@ Website: https://github.com/btford/write-good
 import logging
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -33,7 +33,7 @@ class WriteGoodToolPlugin(ToolPlugin):
         return ["md_src", "rst_src"]
 
     def get_binary(
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -49,7 +49,7 @@ class WriteGoodToolPlugin(ToolPlugin):
     # pylint: disable=too-many-locals
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -96,7 +96,7 @@ class WriteGoodToolPlugin(ToolPlugin):
         return total_output
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 
@@ -113,7 +113,7 @@ class WriteGoodToolPlugin(ToolPlugin):
 
         for output in total_output:
             for line in output.splitlines():
-                match: Optional[Match[str]] = parse.match(line)
+                match: Match[str] | None = parse.match(line)
                 if match:
                     issues.append(
                         Issue(

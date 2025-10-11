@@ -13,7 +13,7 @@ import csv
 import logging
 import subprocess
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import xmltodict
 import yaml
@@ -48,7 +48,7 @@ class CCCCToolPlugin(ToolPlugin):
         )
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -79,7 +79,7 @@ class CCCCToolPlugin(ToolPlugin):
 
     def scan(  # pylint: disable=too-many-branches,too-many-locals
         self, package: Package, level: str
-    ) -> Optional[list[Issue]]:
+    ) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:

@@ -4,7 +4,7 @@ import io
 import logging
 import re
 from contextlib import redirect_stdout
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 import lizard
 
@@ -28,7 +28,7 @@ class LizardToolPlugin(ToolPlugin):
         """
         return "lizard"
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -93,7 +93,7 @@ class LizardToolPlugin(ToolPlugin):
         parse: Pattern[str] = re.compile(lizard_re)
         matches = []
         for line in output.splitlines():
-            match: Optional[Match[str]] = parse.match(line)
+            match: Match[str] | None = parse.match(line)
             if match:
                 matches.append(match.groups())
 

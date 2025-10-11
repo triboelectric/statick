@@ -4,7 +4,7 @@ Sets what flags are used for each plugin at those levels.
 """
 
 import os
-from typing import Any, Optional, Union
+from typing import Any
 
 import yaml
 
@@ -17,9 +17,9 @@ class Config:
 
     def __init__(
         self,
-        base_file: Optional[str],
-        user_file: Optional[str] = "",
-        default_level: Optional[str] = "default",
+        base_file: str | None,
+        user_file: str | None = "",
+        default_level: str | None = "default",
     ) -> None:
         """Initialize the Config object.
 
@@ -82,7 +82,7 @@ class Config:
 
         return None
 
-    def has_level(self, level: Optional[str]) -> bool:
+    def has_level(self, level: str | None) -> bool:
         """Check if given level exists in config.
 
         Args:
@@ -161,7 +161,7 @@ class Config:
         return self.get_enabled_plugins(level, "reporting")
 
     @classmethod
-    def str_to_bool(cls, val: Optional[str]) -> bool:
+    def str_to_bool(cls, val: str | None) -> bool:
         """Convert a string to a bool.
 
         Args:
@@ -187,8 +187,8 @@ class Config:
         plugin: str,
         level: str,
         key: str,
-        default: Optional[str] = None,
-    ) -> Optional[Union[str, Any]]:
+        default: str | None = None,
+    ) -> str | Any | None:
         """Get flags to use for a plugin at a certain level.
 
         Args:
@@ -225,8 +225,8 @@ class Config:
         return default
 
     def get_tool_config(
-        self, plugin: str, level: str, key: str, default: Optional[str] = None
-    ) -> Optional[str]:
+        self, plugin: str, level: str, key: str, default: str | None = None
+    ) -> str | None:
         """Get tool flags to use for a plugin at a certain level.
 
         Args:
@@ -247,8 +247,8 @@ class Config:
         return tool_flags
 
     def get_discovery_config(
-        self, plugin: str, level: str, key: str, default: Optional[str] = None
-    ) -> Optional[str]:
+        self, plugin: str, level: str, key: str, default: str | None = None
+    ) -> str | None:
         """Get discovery flags to use for a plugin at a certain level.
 
         Args:
@@ -263,8 +263,8 @@ class Config:
         return self.get_plugin_config("discovery", plugin, level, key, default)
 
     def get_reporting_config(
-        self, plugin: str, level: str, key: str, default: Optional[str] = None
-    ) -> Optional[str]:
+        self, plugin: str, level: str, key: str, default: str | None = None
+    ) -> str | None:
         """Get reporting flags to use for a plugin at a certain level.
 
         Args:

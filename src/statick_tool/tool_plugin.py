@@ -6,7 +6,7 @@ import os
 import re
 import shlex
 import subprocess
-from typing import Any, Match, Optional, Pattern, Union
+from typing import Any, Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -52,7 +52,7 @@ class ToolPlugin:
         """
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -115,7 +115,7 @@ class ToolPlugin:
 
         parse: Pattern[str] = re.compile(ver_re_str)
         for line in output.splitlines():
-            match: Optional[Match[str]] = parse.match(line)
+            match: Match[str] | None = parse.match(line)
             if match:
                 return line
         return version
@@ -169,7 +169,7 @@ class ToolPlugin:
             )
         return version
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -202,7 +202,7 @@ class ToolPlugin:
 
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -216,7 +216,7 @@ class ToolPlugin:
         """
 
     def parse_output(  # type: ignore[empty-body]
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:  # pyright: ignore
         """Parse tool output and report issues.
 
@@ -228,7 +228,7 @@ class ToolPlugin:
             List of issues.
         """
 
-    def set_plugin_context(self, plugin_context: Union[None, PluginContext]) -> None:
+    def set_plugin_context(self, plugin_context: None | PluginContext) -> None:
         """Set the plugin context.
 
         Args:
@@ -244,9 +244,7 @@ class ToolPlugin:
         """
         file_name: str = f"plugin_mapping/{self.get_name()}.txt"
         assert self.plugin_context is not None
-        full_path: Union[Any, str, None] = self.plugin_context.resources.get_file(
-            file_name
-        )
+        full_path: Any | str | None = self.plugin_context.resources.get_file(file_name)
         if (
             "mapping_file_suffix" in self.plugin_context.args
             and self.plugin_context.args.mapping_file_suffix is not None
@@ -279,7 +277,7 @@ class ToolPlugin:
                 warning_mapping[split_line[0]] = split_line[1]
         return warning_mapping
 
-    def get_user_flags(self, level: str, name: Optional[str] = None) -> list[str]:
+    def get_user_flags(self, level: str, name: str | None = None) -> list[str]:
         """Get the user-defined extra flags for a specific tool/level combination.
 
         Args:

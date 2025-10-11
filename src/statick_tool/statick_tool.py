@@ -10,7 +10,7 @@ import sys
 import time
 from importlib.metadata import version
 from logging.handlers import MemoryHandler
-from typing import Any, Optional, Tuple
+from typing import Any
 
 from statick_tool.config import Config
 from statick_tool.discovery_plugin import DiscoveryPlugin
@@ -59,8 +59,8 @@ class Statick:  # pylint: disable=too-many-instance-attributes
             plugin = plugin_type.load()
             self.tool_plugins[plugin_type.name] = plugin()
 
-        self.config: Optional[Config] = None
-        self.exceptions: Optional[Exceptions] = None
+        self.config: Config | None = None
+        self.exceptions: Exceptions | None = None
         self.timings: list[Timing] = []
         self.tool_versions: list[ToolVersion] = []
 
@@ -282,7 +282,7 @@ class Statick:  # pylint: disable=too-many-instance-attributes
         for _, plugin in list(self.tool_plugins.items()):
             plugin.gather_args(args)
 
-    def get_level(self, path: str, args: argparse.Namespace) -> Optional[str]:
+    def get_level(self, path: str, args: argparse.Namespace) -> str | None:
         """Get level to scan package at.
 
         Args:
@@ -376,7 +376,7 @@ class Statick:  # pylint: disable=too-many-instance-attributes
             logging.error("No package found at %s!", path)
             return False
 
-        level: Optional[str] = self.get_level(path, args)
+        level: str | None = self.get_level(path, args)
         logging.info("level: %s", level)
         if level is None:
             logging.error("Level is not valid.")
@@ -399,8 +399,8 @@ class Statick:  # pylint: disable=too-many-instance-attributes
     # pylint: disable=too-many-locals, too-many-return-statements, too-many-branches
     # pylint: disable=too-many-statements
     def run(
-        self, path: str, args: argparse.Namespace, start_time: Optional[float] = None
-    ) -> Tuple[Optional[dict[str, list[Issue]]], bool]:
+        self, path: str, args: argparse.Namespace, start_time: float | None = None
+    ) -> tuple[dict[str, list[Issue]] | None, bool]:
         """Run scan tools against targets on path.
 
         Args:
@@ -419,7 +419,7 @@ class Statick:  # pylint: disable=too-many-instance-attributes
             return None, False
 
         package = Package(os.path.basename(path), path)
-        level: Optional[str] = self.get_level(path, args)
+        level: str | None = self.get_level(path, args)
         logging.info("level: %s", level)
         if level is None:
             logging.error("Level is not valid.")
@@ -632,9 +632,9 @@ class Statick:  # pylint: disable=too-many-instance-attributes
         return issues, success
 
     def run_workspace(
-        self, parsed_args: argparse.Namespace, start_time: Optional[float] = None
-    ) -> Tuple[
-        Optional[dict[str, list[Issue]]], bool
+        self, parsed_args: argparse.Namespace, start_time: float | None = None
+    ) -> tuple[
+        dict[str, list[Issue]] | None, bool
     ]:  # pylint: disable=too-many-locals, too-many-branches, too-many-statements
         """Run statick on a workspace.
 
@@ -794,7 +794,7 @@ class Statick:  # pylint: disable=too-many-instance-attributes
         count: int,
         package: Package,
         num_packages: int,
-    ) -> Tuple[Optional[dict[str, list[Issue]]], list[Timing]]:
+    ) -> tuple[dict[str, list[Issue]] | None, list[Timing]]:
         """Scan each package in a separate process while buffering output.
 
         Args:

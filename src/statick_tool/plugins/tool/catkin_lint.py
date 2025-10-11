@@ -4,7 +4,7 @@ import logging
 import os
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -32,7 +32,7 @@ class CatkinLintToolPlugin(ToolPlugin):
 
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -112,7 +112,7 @@ class CatkinLintToolPlugin(ToolPlugin):
         return 1
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 
@@ -130,7 +130,7 @@ class CatkinLintToolPlugin(ToolPlugin):
 
         issues: list[Issue] = []
         for line in total_output:
-            match: Optional[Match[str]] = parse.match(line)
+            match: Match[str] | None = parse.match(line)
             if match:
                 if package is not None and self.check_for_exceptions_has_file(
                     match, package
@@ -154,7 +154,7 @@ class CatkinLintToolPlugin(ToolPlugin):
                     )
                 )
             else:
-                match2: Optional[Match[str]] = parse2.match(line)
+                match2: Match[str] | None = parse2.match(line)
 
                 if match2:
                     if package is not None:

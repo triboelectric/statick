@@ -1,6 +1,6 @@
 """Issue interface."""
 
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 
 Issue = NamedTuple(
     "Issue",
@@ -11,6 +11,6 @@ Issue = NamedTuple(
         ("issue_type", str),
         ("severity", int),
         ("message", str),
-        ("cert_reference", Optional[str]),
+        ("cert_reference", str | None),
     ],
 )
