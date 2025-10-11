@@ -4,6 +4,7 @@ import logging
 import os
 import re
 import subprocess
+import sys
 from typing import Match, Optional, Pattern
 
 from statick_tool.issue import Issue
@@ -49,6 +50,12 @@ class DocformatterToolPlugin(ToolPlugin):
         flags += user_flags
         tool_bin = self.get_binary()
         total_output: list[str] = []
+
+        if sys.version_info >= (3, 14):
+            logging.warning(
+                "docformatter does not support Python 3.14+. Skipping this tool."
+            )
+            return total_output
 
         try:
             subproc_args = [tool_bin] + flags + files
