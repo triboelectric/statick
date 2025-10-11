@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Support for Python 3.9 in CI.
 
+### Updated
+
+- Use `|` (pipe) syntax for type hints.
+  Replaces `Optional` and `Union`.
+
 ## v0.13.0 - 2025-06-03
 
 The main Statick repository was moved from <https://github.com/sscpac/statick> to
