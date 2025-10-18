@@ -5,7 +5,6 @@ import logging
 import pathlib
 import shutil
 import subprocess
-from typing import Optional, Tuple
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -31,7 +30,7 @@ class ESLintToolPlugin(ToolPlugin):
         """
         return ["html_src", "javascript_src"]
 
-    def get_format_file(self, level: str) -> Tuple[Optional[str], bool]:
+    def get_format_file(self, level: str) -> tuple[str | None, bool]:
         """Retrieve format file path.
 
         Args:
@@ -85,7 +84,7 @@ class ESLintToolPlugin(ToolPlugin):
     # pylint: disable=too-many-locals
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -168,7 +167,7 @@ class ESLintToolPlugin(ToolPlugin):
             format_file_path.unlink()
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 

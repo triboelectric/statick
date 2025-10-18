@@ -4,7 +4,6 @@ import json
 import logging
 import pathlib
 import subprocess
-from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -33,7 +32,7 @@ class DockerfileLintToolPlugin(ToolPlugin):
     # pylint: disable=too-many-locals
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -98,7 +97,7 @@ class DockerfileLintToolPlugin(ToolPlugin):
     # pylint: enable=too-many-locals
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 

@@ -2,7 +2,7 @@
 
 import argparse
 import logging
-from typing import Any, Optional, Tuple, Union
+from typing import Any
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -14,7 +14,7 @@ class ReportingPlugin:
 
     plugin_context = None
 
-    def get_name(self) -> Optional[str]:
+    def get_name(self) -> str | None:
         """Get name of reporting plugin.
 
         Returns:
@@ -30,7 +30,7 @@ class ReportingPlugin:
 
     def report(  # type: ignore[empty-body]
         self, package: Package, issues: dict[str, list[Issue]], level: str
-    ) -> Tuple[Optional[None], bool]:  # pyright: ignore
+    ) -> tuple[None, bool]:  # pyright: ignore
         """Run the report generator.
 
         Args:
@@ -42,7 +42,7 @@ class ReportingPlugin:
             Tuple of None and False.
         """
 
-    def set_plugin_context(self, plugin_context: Union[None, PluginContext]) -> None:
+    def set_plugin_context(self, plugin_context: None | PluginContext) -> None:
         """Setter for plugin_context.
 
         Args:
@@ -59,9 +59,7 @@ class ReportingPlugin:
         """
         file_name: str = f"plugin_mapping/{self.get_name()}.txt"
         assert self.plugin_context is not None
-        full_path: Union[Any, str, None] = self.plugin_context.resources.get_file(
-            file_name
-        )
+        full_path: Any | str | None = self.plugin_context.resources.get_file(file_name)
         if (
             "mapping_file_suffix" in self.plugin_context.args
             and self.plugin_context.args.mapping_file_suffix is not None

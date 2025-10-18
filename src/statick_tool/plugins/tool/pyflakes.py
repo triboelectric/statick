@@ -3,7 +3,7 @@
 import logging
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -31,7 +31,7 @@ class PyflakesToolPlugin(ToolPlugin):
 
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -75,7 +75,7 @@ class PyflakesToolPlugin(ToolPlugin):
         return total_output
 
     def parse_output(  # pylint: disable=too-many-locals
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 
@@ -105,7 +105,7 @@ class PyflakesToolPlugin(ToolPlugin):
             found_match = False
             for line in output.splitlines():
                 if first_line:
-                    match: Optional[Match[str]] = parse_first.match(line)
+                    match: Match[str] | None = parse_first.match(line)
                     first_line = False
                     if match:
                         found_match = True
@@ -113,23 +113,21 @@ class PyflakesToolPlugin(ToolPlugin):
                         line_number = int(match.group(2))
                         issue_type = match.group(4)
                     else:
-                        match_second: Optional[Match[str]] = parse_second.match(line)
+                        match_second: Match[str] | None = parse_second.match(line)
                         if match_second:
                             found_match = True
                             filename = match_second.group(1)
                             line_number = int(match_second.group(2))
                             issue_type = match_second.group(4)
                         else:
-                            match_fourth: Optional[Match[str]] = parse_fourth.match(
-                                line
-                            )
+                            match_fourth: Match[str] | None = parse_fourth.match(line)
                             if match_fourth:
                                 found_match = True
                                 filename = match_fourth.group(1)
                                 line_number = int(match_fourth.group(2))
                                 issue_type = match_fourth.group(5)
                 else:
-                    match_third: Optional[Match[str]] = parse_third.match(line)
+                    match_third: Match[str] | None = parse_third.match(line)
                     first_line = True
                     if match_third:
                         found_match = True

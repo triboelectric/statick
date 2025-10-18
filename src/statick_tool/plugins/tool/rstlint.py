@@ -1,7 +1,6 @@
 """Apply rst-lint tool and gather results."""
 
 import logging
-from typing import Optional
 
 import restructuredtext_lint
 from docutils.utils import SystemMessage
@@ -23,7 +22,7 @@ class RstlintToolPlugin(ToolPlugin):
         return "rstlint"
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -37,7 +36,7 @@ class RstlintToolPlugin(ToolPlugin):
         return "rst-lint"
 
     # pylint: disable=too-many-locals
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:

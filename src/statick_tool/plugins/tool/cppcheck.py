@@ -5,7 +5,7 @@ import logging
 import os
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from packaging.version import Version
 
@@ -43,7 +43,7 @@ class CppcheckToolPlugin(ToolPlugin):
         )
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -77,13 +77,13 @@ class CppcheckToolPlugin(ToolPlugin):
         version = "0.0"
         ver_re = r"(.+) ([0-9]*\.?[0-9]+)"
         parse: Pattern[str] = re.compile(ver_re)
-        match: Optional[Match[str]] = parse.match(version_str)
+        match: Match[str] | None = parse.match(version_str)
         if match:
             version = match.group(2)
         return version
 
     # pylint: disable=too-many-locals, too-many-branches, too-many-return-statements
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -202,7 +202,7 @@ class CppcheckToolPlugin(ToolPlugin):
         issues: list[Issue] = []
         warnings_mapping = self.load_mapping()
         for line in output.splitlines():
-            match: Optional[Match[str]] = parse.match(line)
+            match: Match[str] | None = parse.match(line)
             if (
                 match
                 and line[1] != "*"

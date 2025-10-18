@@ -4,7 +4,7 @@ import logging
 import os
 import subprocess
 import sys
-from typing import Any, Optional, Union
+from typing import Any
 
 from statick_tool.exceptions import Exceptions
 from statick_tool.package import Package
@@ -16,7 +16,7 @@ class DiscoveryPlugin:
 
     plugin_context = None
 
-    def get_name(self) -> Optional[str]:
+    def get_name(self) -> str | None:
         """Get name of plugin.
 
         Returns:
@@ -40,7 +40,7 @@ class DiscoveryPlugin:
         """
 
     def scan(
-        self, package: Package, level: str, exceptions: Optional[Exceptions] = None
+        self, package: Package, level: str, exceptions: Exceptions | None = None
     ) -> None:
         """Scan package to discover files for analysis.
 
@@ -114,7 +114,7 @@ class DiscoveryPlugin:
             logging.warning("OSError on file command for %s", full_path)
             return ""
 
-    def set_plugin_context(self, plugin_context: Union[None, PluginContext]) -> None:
+    def set_plugin_context(self, plugin_context: None | PluginContext) -> None:
         """Set the plugin context.
 
         Args:

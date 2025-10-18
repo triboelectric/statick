@@ -2,7 +2,6 @@
 
 import logging
 from collections import OrderedDict
-from typing import Optional, Tuple
 
 from statick_tool.discovery_plugin import DiscoveryPlugin
 from statick_tool.exceptions import Exceptions
@@ -21,7 +20,7 @@ class XMLDiscoveryPlugin(DiscoveryPlugin):
         return "xml"
 
     def scan(
-        self, package: Package, level: str, exceptions: Optional[Exceptions] = None
+        self, package: Package, level: str, exceptions: Exceptions | None = None
     ) -> None:
         """Scan package looking for XML files.
 
@@ -31,7 +30,7 @@ class XMLDiscoveryPlugin(DiscoveryPlugin):
             exceptions: Optional exceptions to apply.
         """
         xml_files: list[str] = []
-        xml_extensions: Tuple[str, str] = (".xml", ".launch")
+        xml_extensions: tuple[str, str] = (".xml", ".launch")
 
         self.find_files(package)
 

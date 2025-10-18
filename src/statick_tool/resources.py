@@ -5,7 +5,6 @@ Handles chaining user directories and the default statick resource directory.
 
 import logging
 import os
-from typing import Optional
 
 
 class Resources:
@@ -47,7 +46,7 @@ class Resources:
                 plugin_paths.append(full_path)
         return plugin_paths
 
-    def get_file(self, filename: str) -> Optional[str]:
+    def get_file(self, filename: str) -> str | None:
         """Get full path to file for default and user-defined resource paths.
 
         Args:

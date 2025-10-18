@@ -1,7 +1,6 @@
 """Do nothing, this is primarily useful for testing purposes."""
 
 from importlib.metadata import version
-from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -28,7 +27,7 @@ class DoNothingToolPlugin(ToolPlugin):
         return []
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -51,7 +50,7 @@ class DoNothingToolPlugin(ToolPlugin):
 
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -66,7 +65,7 @@ class DoNothingToolPlugin(ToolPlugin):
         return []
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 

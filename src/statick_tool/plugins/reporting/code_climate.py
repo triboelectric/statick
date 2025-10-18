@@ -5,7 +5,7 @@ import json
 import logging
 import os
 from collections import OrderedDict
-from typing import Any, Optional, Tuple
+from typing import Any
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -21,7 +21,7 @@ class CodeClimateReportingPlugin(ReportingPlugin):
 
     def report(
         self, package: Package, issues: dict[str, list[Issue]], level: str
-    ) -> Tuple[Optional[None], bool]:
+    ) -> tuple[None, bool]:
         """Go through the issues list and print them in JSON format.
 
         Args:

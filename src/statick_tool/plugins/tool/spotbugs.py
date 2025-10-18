@@ -4,7 +4,6 @@ import logging
 import os
 import subprocess
 import xml.etree.ElementTree as etree
-from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -31,7 +30,7 @@ class SpotbugsToolPlugin(ToolPlugin):
         """
         return ["make"]
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -58,10 +57,10 @@ class SpotbugsToolPlugin(ToolPlugin):
         ]
         flags += self.get_user_flags(level)
 
-        include_file: Optional[str] = self.plugin_context.config.get_tool_config(
+        include_file: str | None = self.plugin_context.config.get_tool_config(
             self.get_name(), level, "include"
         )
-        exclude_file: Optional[str] = self.plugin_context.config.get_tool_config(
+        exclude_file: str | None = self.plugin_context.config.get_tool_config(
             self.get_name(), level, "exclude"
         )
         if include_file is not None:
@@ -112,7 +111,7 @@ class SpotbugsToolPlugin(ToolPlugin):
 
     def parse_file_output(  # pylint: disable=too-many-locals
         self, output: str
-    ) -> Optional[list[Issue]]:
+    ) -> list[Issue] | None:
         """Parse tool output and report issues.
 
         Args:

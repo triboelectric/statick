@@ -4,7 +4,6 @@ import fnmatch
 import logging
 import os
 from collections import OrderedDict
-from typing import Optional
 
 from statick_tool.discovery_plugin import DiscoveryPlugin
 from statick_tool.exceptions import Exceptions
@@ -23,7 +22,7 @@ class MavenDiscoveryPlugin(DiscoveryPlugin):
         return "maven"
 
     def scan(
-        self, package: Package, level: str, exceptions: Optional[Exceptions] = None
+        self, package: Package, level: str, exceptions: Exceptions | None = None
     ) -> None:
         """Scan package looking for maven files.
 

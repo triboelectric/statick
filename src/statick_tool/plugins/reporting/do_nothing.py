@@ -1,7 +1,5 @@
 """Do nothing to have a default reporting plugin with no side effects."""
 
-from typing import Optional, Tuple
-
 from statick_tool.issue import Issue
 from statick_tool.package import Package
 from statick_tool.reporting_plugin import ReportingPlugin
@@ -16,7 +14,7 @@ class DoNothingReportingPlugin(ReportingPlugin):
 
     def report(
         self, package: Package, issues: dict[str, list[Issue]], level: str
-    ) -> Tuple[Optional[None], bool]:
+    ) -> tuple[None, bool]:
         """Do nothing.
 
         Args:

@@ -16,7 +16,7 @@ import os
 import re
 import shutil
 import subprocess
-from typing import Match, Optional, Pattern, Union
+from typing import Match, Pattern
 
 from statick_tool.discovery_plugin import DiscoveryPlugin
 from statick_tool.exceptions import Exceptions
@@ -54,7 +54,7 @@ class CMakeDiscoveryPlugin(DiscoveryPlugin):
         )
 
     def scan(
-        self, package: Package, level: str, exceptions: Optional[Exceptions] = None
+        self, package: Package, level: str, exceptions: Exceptions | None = None
     ) -> None:
         """Scan package looking for CMake files.
 
@@ -90,7 +90,7 @@ class CMakeDiscoveryPlugin(DiscoveryPlugin):
         cmake_template = self.plugin_context.resources.get_file("CMakeLists.txt.in")
         shutil.copyfile(cmake_template, "CMakeLists.txt")  # type: ignore
 
-        tool_flags: Union[str, None] = self.plugin_context.config.get_tool_config(
+        tool_flags: str | None = self.plugin_context.config.get_tool_config(
             "make", level, "flags", ""
         )
 
@@ -186,7 +186,7 @@ class CMakeDiscoveryPlugin(DiscoveryPlugin):
         qt_p: Pattern[str] = re.compile(qt_re)
 
         for line in output.splitlines():
-            match_target: Optional[Match[str]] = target_p.match(line)
+            match_target: Match[str] | None = target_p.match(line)
             if match_target:
                 name = match_target.group(1)
                 src_dir = match_target.group(2)
@@ -213,13 +213,13 @@ class CMakeDiscoveryPlugin(DiscoveryPlugin):
                 }
                 package["make_targets"].append(target)
 
-            match_headers: Optional[Match[str]] = headers_p.match(line)
+            match_headers: Match[str] | None = headers_p.match(line)
             if match_headers:
                 headers = match_headers.group(1).split(";")
                 headers = [header for header in headers if not qt_p.match(header)]
                 package["headers"] += headers
 
-            match_lint: Optional[Match[str]] = roslint_p.match(line)
+            match_lint: Match[str] | None = roslint_p.match(line)
             if match_lint:
                 roslint = os.path.normpath(match_lint.group(1))
                 cpplint = os.path.join(roslint, "cpplint")
@@ -231,7 +231,7 @@ class CMakeDiscoveryPlugin(DiscoveryPlugin):
             else:
                 package["cpplint"] = "cpplint"
 
-            match_project: Optional[Match[str]] = project_p.match(line)
+            match_project: Match[str] | None = project_p.match(line)
             if match_project:
                 package["src_dir"] = match_project.group(2)
                 package["bin_dir"] = match_project.group(3)

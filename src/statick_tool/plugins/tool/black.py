@@ -3,7 +3,7 @@
 import logging
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -31,7 +31,7 @@ class BlackToolPlugin(ToolPlugin):
 
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -80,7 +80,7 @@ class BlackToolPlugin(ToolPlugin):
         return total_output
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 
@@ -108,7 +108,7 @@ class BlackToolPlugin(ToolPlugin):
         for output in total_output:
             for line in output.splitlines():
                 if line.startswith("would reformat"):
-                    match: Optional[Match[str]] = parse_reformat.match(line)
+                    match: Match[str] | None = parse_reformat.match(line)
                     if match:
                         issues.append(
                             Issue(
@@ -122,10 +122,8 @@ class BlackToolPlugin(ToolPlugin):
                             )
                         )
                 if line.startswith("error"):
-                    match_tool_error: Optional[Match[str]] = parse_tool_error.match(
-                        line
-                    )
-                    match_parse_error: Optional[Match[str]] = parse_error.match(line)
+                    match_tool_error: Match[str] | None = parse_tool_error.match(line)
+                    match_parse_error: Match[str] | None = parse_error.match(line)
                     if match_parse_error:
                         issues.append(
                             Issue(

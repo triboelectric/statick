@@ -7,7 +7,7 @@ import argparse
 import json
 import logging
 import subprocess
-from typing import Any, Optional
+from typing import Any
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -39,7 +39,7 @@ class ShellcheckToolPlugin(ToolPlugin):
         )
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -55,7 +55,7 @@ class ShellcheckToolPlugin(ToolPlugin):
             binary = self.plugin_context.args.shellcheck_bin
         return binary
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:

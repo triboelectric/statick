@@ -3,7 +3,7 @@
 import logging
 import re
 import subprocess
-from typing import Any, Match, Optional, Pattern
+from typing import Any, Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -21,7 +21,7 @@ class MakeToolPlugin(ToolPlugin):
         """
         return "make"
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -132,7 +132,7 @@ class MakeToolPlugin(ToolPlugin):
         # Load the plugin mapping if possible
         warnings_mapping = self.load_mapping()
         for line in output.splitlines():
-            match: Optional[Match[str]] = parse.match(line)
+            match: Match[str] | None = parse.match(line)
             if match and not self.check_for_exceptions(match):
                 matches.append(match.groups())
 

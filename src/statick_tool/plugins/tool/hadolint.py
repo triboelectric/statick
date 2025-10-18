@@ -4,7 +4,6 @@ import argparse
 import json
 import logging
 import subprocess
-from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -50,7 +49,7 @@ class HadolintToolPlugin(ToolPlugin):
         return ["dockerfile_src"]
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -88,7 +87,7 @@ class HadolintToolPlugin(ToolPlugin):
     # pylint: disable=too-many-locals
     def process_files(
         self, package: Package, level: str, files: list[str], user_flags: list[str]
-    ) -> Optional[list[str]]:
+    ) -> list[str] | None:
         """Run tool and gather output.
 
         Args:
@@ -153,7 +152,7 @@ class HadolintToolPlugin(ToolPlugin):
 
     def scan_local_binary(
         self, tool_bin: str, flags: list[str], files: list[str]
-    ) -> Optional[str]:
+    ) -> str | None:
         """Use locally installed hadolint binary to scan.
 
         Args:
@@ -183,7 +182,7 @@ class HadolintToolPlugin(ToolPlugin):
 
     def scan_docker(
         self, tool_bin: str, flags: list[str], files: list[str], config_file_path: str
-    ) -> Optional[str]:
+    ) -> str | None:
         """Use hadolint docker image to scan.
 
         Args:
@@ -247,7 +246,7 @@ class HadolintToolPlugin(ToolPlugin):
             return None
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 

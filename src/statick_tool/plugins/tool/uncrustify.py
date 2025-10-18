@@ -4,7 +4,6 @@ import argparse
 import difflib
 import logging
 import subprocess
-from typing import Optional
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -36,7 +35,7 @@ class UncrustifyToolPlugin(ToolPlugin):
         )
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Get tool binary name.
 
@@ -58,7 +57,7 @@ class UncrustifyToolPlugin(ToolPlugin):
 
     def scan(  # pylint: disable=too-many-locals, too-many-branches
         self, package: Package, level: str
-    ) -> Optional[list[Issue]]:
+    ) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -145,7 +144,7 @@ class UncrustifyToolPlugin(ToolPlugin):
         return issues
 
     def parse_output(
-        self, total_output: list[str], package: Optional[Package] = None
+        self, total_output: list[str], package: Package | None = None
     ) -> list[Issue]:
         """Parse tool output and report issues.
 

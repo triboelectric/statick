@@ -4,7 +4,7 @@ import logging
 import os
 import re
 import subprocess
-from typing import Match, Optional, Pattern
+from typing import Match, Pattern
 
 from statick_tool.issue import Issue
 from statick_tool.package import Package
@@ -23,7 +23,7 @@ class CpplintToolPlugin(ToolPlugin):
         return "cpplint"
 
     def get_binary(  # pylint: disable=unused-argument
-        self, level: Optional[str] = None, package: Optional[Package] = None
+        self, level: str | None = None, package: Package | None = None
     ) -> str:
         """Return the name of the tool binary.
 
@@ -40,7 +40,7 @@ class CpplintToolPlugin(ToolPlugin):
 
         return binary
 
-    def scan(self, package: Package, level: str) -> Optional[list[Issue]]:
+    def scan(self, package: Package, level: str) -> list[Issue] | None:
         """Run tool and gather output.
 
         Args:
@@ -135,7 +135,7 @@ class CpplintToolPlugin(ToolPlugin):
         parse: Pattern[str] = re.compile(lint_re)
         issues: list[Issue] = []
         for line in output.splitlines():
-            match: Optional[Match[str]] = parse.match(line)
+            match: Match[str] | None = parse.match(line)
             if match and not self.check_for_exceptions(match):
                 norm_path = os.path.normpath(match.group(1))
                 issues.append(

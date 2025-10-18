@@ -2,7 +2,6 @@
 
 import logging
 from collections import OrderedDict
-from typing import Optional, Tuple
 
 from statick_tool.discovery_plugin import DiscoveryPlugin
 from statick_tool.exceptions import Exceptions
@@ -21,7 +20,7 @@ class TexDiscoveryPlugin(DiscoveryPlugin):
         return "tex"
 
     def scan(
-        self, package: Package, level: str, exceptions: Optional[Exceptions] = None
+        self, package: Package, level: str, exceptions: Exceptions | None = None
     ) -> None:
         """Scan package looking for TeX files.
 
@@ -31,7 +30,7 @@ class TexDiscoveryPlugin(DiscoveryPlugin):
             exceptions: Optional exceptions to apply.
         """
         tex_files: list[str] = []
-        tex_extensions: Tuple[str, str] = (".tex", ".bib")
+        tex_extensions: tuple[str, str] = (".tex", ".bib")
         tex_ignore_extensions = (".sty", ".log", ".cls")
         tex_output = ["latex document", "bibtex text file", "latex 2e document"]
 
