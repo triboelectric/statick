@@ -1,6 +1,6 @@
-name: Test Test Test
-author: 'Definitely Not Triboelectric'
-description: 'Run Statick'
+name: Statick Code Analysis
+author: Triboelectric
+description: Run Statick
 branding:
   icon: 'zap'
   color: 'yellow'
