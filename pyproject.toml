@@ -43,7 +43,7 @@ dependencies = [
     "pyflakes",
     "pylint",
     "pyright",
-    "restructuredtext-lint",
+    "restructuredtext-lint>=2",
     "rstcheck",
     "ruff>=0.0.237",
     "sphinx",
