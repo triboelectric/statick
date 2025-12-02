@@ -57,7 +57,7 @@ class RstlintToolPlugin(ToolPlugin):
         total_output: list[SystemMessage] = []
 
         for src in files:
-            output = restructuredtext_lint.lint_file(src, None, flags)
+            output = restructuredtext_lint.lint_file(src, flags)
             total_output.extend(output)
 
         for output in total_output:

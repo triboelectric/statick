@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Support for Python 3.9 in CI.
 
+### Fixed
+
+- Fix call to updated restructuredtext-lint lint_file. (#556)
+  - The minimum supported version of restructuredtext-lint is now 2.0.0.
+
 ### Updated
 
 - Use `|` (pipe) syntax for type hints.
