@@ -593,7 +593,8 @@ using the new approaches.
 
 To scan a ROS workspace with multiple packages there used to be a separate executable named `statick_ws`.
 That same functionality is now accessed via the main `statick` executable by passing in the `-ws` flag.
-Anywhere that you used to use `statick_ws <workspace_directory/src>`, change that to `statick <workspace_directory/src> -ws`.
+Anywhere that you used to use `statick_ws <workspace_directory/src>`, change that to
+`statick <workspace_directory/src> -ws`.
 
 When scanning a ROS workspace all of the packages in that workspace will now be scanned in parallel.
 The default number of packages to scan in parallel is half the number of CPU cores on the current computer.
@@ -636,7 +637,8 @@ Instead you should now use the flag `--log DEBUG`.
 - A big speedup improvement of roughly 3x was implemented for the discovery phase.
   The main discovery plugin will now walk through the filesystem once per package and cache information about absolute
   file paths and `file` command output.
-  Each discovery plugin can now use that cached information instead of walking the filesystem itself. (Alexander Xydes, @xydesa)
+  Each discovery plugin can now use that cached information instead of walking the filesystem itself.
+  (Alexander Xydes, @xydesa)
 - Any directory with `COLCON_IGNORE` (and all of its subdirectories) will be ignored by `statick_ws`.
   This is a standard file used by ROS2 to indicate that a ROS2 package should be ignored. (Alexander Xydes, @xydesa)
 
