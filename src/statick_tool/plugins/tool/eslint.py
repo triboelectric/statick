@@ -98,7 +98,7 @@ class ESLintToolPlugin(ToolPlugin):
         """
         tool_bin = self.get_binary()
 
-        (format_file_name, copied_file) = self.get_format_file(level)
+        format_file_name, copied_file = self.get_format_file(level)
 
         flags: list[str] = ["-f", "json"]
         if format_file_name is not None:
